@@ -1,0 +1,12 @@
+.main {
+  text-align: center;
+  margin-top: 15%;
+}
+.main__search__input {
+  width: 30%;
+  height: 3em;
+  border-radius: 20em;
+  border: 1px solid black;
+  outline: none;
+  text-align: center;
+}
