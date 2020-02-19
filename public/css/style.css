@@ -35,6 +35,18 @@
   outline: none;
   text-align: center;
 }
+
+.search__button{
+  width: 10%;
+  height: 3em;
+  border-radius: 20em;
+  border: 1px solid black;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  background-color: rgb(177, 177, 226);
+}
+
 .section{
   width: 90%;
   margin: 10% auto;
@@ -61,6 +73,7 @@
 .section__news__title{
   color: rgb(136, 47, 15);
 }
+
 
 .error {
   display: flex;
