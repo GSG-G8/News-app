@@ -12,7 +12,7 @@ const cleardate = (myNode) => {
 const showResults = (result) => {
   cleardate(container);
   const resultLength = result.articles.length;
-  for (let i = 0; i < resultLength; i++) {
+  for (let i = 0; i < resultLength; i++ ) {
     const articleRes = document.createElement('article');
     const title = document.createElement('h2');
     const desc = document.createElement('p');
@@ -43,6 +43,12 @@ const showResults = (result) => {
     author.classList = 'section__news__author';
   }
 };
+const fetchMainRout = (rout) => fetch(rout);
+
+fetchMainRout('/home')
+  .then((result) => result.json())
+  .then((res) => showResults(res))
+  .catch(console.error);
 
 searchInput.addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
@@ -50,6 +56,8 @@ searchInput.addEventListener('keyup', (event) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: searchInput.value }),
-    }).then((result) => result.json()).then(res => showResults(res));
+    }).then((result) => result.json())
+      .then((res) => showResults(res))
+      .catch(console.error);
   }
 });

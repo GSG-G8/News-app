@@ -15,15 +15,17 @@ app.set('port', process.env.PORT || 3020);
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
-app.get('/', (req, res, next) => {
+app.get('/home', (req, res) => {
   fetch(`http://newsapi.org/v2/top-headlines?sources=al-jazeera-english&apiKey=${process.env.key}`)
-  .then(result => result.join()).then(result => res.json(result));
-})
+    .then((result) => result.json())
+    .then((result) => res.json(result));
+});
 
 app.post('/search', (req, res, next) => {
   const searchName = req.body.name;
-
-  fetch(`http://newsapi.org/v2/everything?q=${searchName}&sortBy=publishedAt&apiKey=${process.env.key}`).then(result => result.json()).then(result => res.json(result));
+  fetch(`http://newsapi.org/v2/everything?q=${searchName}&sortBy=publishedAt&apiKey=${process.env.key}`)
+    .then((result) => result.json())
+    .then((result) => res.json(result));
 });
 
 app.use(handleErr.clientErr);
