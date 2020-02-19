@@ -22,7 +22,8 @@ app.get('/', (req, res, next) => {
 
 app.post('/search', (req, res, next) => {
   const searchName = req.body.name;
-  fetch(`http://newsapi.org/v2/everything?q=${searchName}&from=2020-02-18&sortBy=publishedAt&apiKey=${process.env.key}`).then(result => result.json()).then(result => res.json(result));
+
+  fetch(`http://newsapi.org/v2/everything?q=${searchName}&sortBy=publishedAt&apiKey=${process.env.key}`).then(result => result.json()).then(result => res.json(result));
 });
 
 app.use(handleErr.clientErr);
