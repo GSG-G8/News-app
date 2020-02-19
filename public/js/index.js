@@ -14,9 +14,10 @@ const showResults = (result) => {
   const resultLength = result.articles.length;
   for (let i = 0; i < resultLength; i++ ) {
     const articleRes = document.createElement('article');
+    const imgArt = document.createElement('img');
+    const content = document.createElement('div');
     const title = document.createElement('h2');
     const desc = document.createElement('p');
-    const imgArt = document.createElement('img');
     const linkDetails = document.createElement('a');
     const author = document.createElement('p');
 
@@ -29,13 +30,15 @@ const showResults = (result) => {
     author.textContent = result.articles[i].author;
 
     container.appendChild(articleRes);
-    articleRes.appendChild(title);
-    articleRes.appendChild(desc);
     articleRes.appendChild(imgArt);
-    articleRes.appendChild(linkDetails);
-    articleRes.appendChild(author);
+    articleRes.appendChild(content);
+    content.appendChild(title);
+    content.appendChild(desc);
+    content.appendChild(linkDetails);
+    content.appendChild(author);
 
     articleRes.classList = 'section__news';
+    content.classList = 'content';
     title.classList = 'section__news__title';
     desc.classList = 'section__news__desc';
     imgArt.classList = 'section__news__imgArt';
