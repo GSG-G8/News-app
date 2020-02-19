@@ -1,4 +1,5 @@
 const searchInput = document.getElementById('search');
+const searchButton = document.querySelector('.search__button');
 const container = document.querySelector('.section');
 
 
@@ -12,7 +13,7 @@ const cleardate = (myNode) => {
 const showResults = (result) => {
   cleardate(container);
   const resultLength = result.articles.length;
-  for (let i = 0; i < resultLength; i++ ) {
+  for (let i = 0; i < resultLength; i++) {
     const articleRes = document.createElement('article');
     const title = document.createElement('h2');
     const desc = document.createElement('p');
@@ -50,14 +51,19 @@ fetchMainRout('/home')
   .then((res) => showResults(res))
   .catch(console.error);
 
+
+const displyData = (endpoint) => {
+  fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: searchInput.value }),
+  }).then((result) => result.json())
+    .then((res) => showResults(res))
+    .catch(console.error);
+};
+// /// Disply data in Desktop device ////////
 searchInput.addEventListener('keyup', (event) => {
-  if (event.keyCode === 13) {
-    fetch('/search', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: searchInput.value }),
-    }).then((result) => result.json())
-      .then((res) => showResults(res))
-      .catch(console.error);
-  }
+  if (event.keyCode === 13) displyData('/search');
 });
+// ///Disply data in Mobile device////////
+searchButton.addEventListener('click', () => { displyData('/search'); });
