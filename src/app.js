@@ -10,7 +10,7 @@ app.set('port', process.env.PORT || 3020);
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.post('/search', (req, res, next) => {
   const searchName = req.body.name;
-  fetch(`http://newsapi.org/v2/everything?q=${searchName}&from=2020-01-18&sortBy=publishedAt&apiKey=${process.env.key}`).then(result => result.json()).then(result => res.json(result));
+  fetch(`http://newsapi.org/v2/everything?q=${searchName}&sortBy=publishedAt&apiKey=996e2667c1e14ea5b97147f98b7aeadc`).then(result => result.json()).then(result => res.json(result));
 });
 
 app.listen(app.get('port'), () => {
