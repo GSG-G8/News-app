@@ -25,10 +25,11 @@ const showResults = (result) => {
     title.textContent = result.articles[i].title;
     desc.textContent = result.articles[i].description;
     imgArt.src = result.articles[i].urlToImage;
+    imgArt.alt = 'article image';
     linkDetails.textContent = 'For more Details';
     linkDetails.href = result.articles[i].url;
     linkDetails.target = 'blank';
-    author.textContent = result.articles[i].author;
+    author.textContent = `Author: ${result.articles[i].author}`;
 
     container.appendChild(articleRes);
     articleRes.appendChild(imgArt);
@@ -68,5 +69,5 @@ const displyData = (endpoint) => {
 searchInput.addEventListener('keyup', (event) => {
   if (event.keyCode === 13) displyData('/search');
 });
-// ///Disply data in Mobile device////////
+// ///Disply data in all device////////
 searchButton.addEventListener('click', () => { displyData('/search'); });
