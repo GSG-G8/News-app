@@ -1,7 +1,14 @@
 const searchInput = document.getElementById('search');
 const searchButton = document.querySelector('.search__button');
 const container = document.querySelector('.section');
+const emptyMsg = document.getElementById('emptyMsg');
 
+
+// if (searchInput.validity.valueMissing) {
+//   emptyMsg.textContent = '';
+//   emptyMsg.textContent = 'Empty value not allowed';
+//   emptyMsg.style.color = 'red';
+// }
 
 const cleardate = (myNode) => {
   while (myNode.firstChild) {
@@ -50,11 +57,18 @@ const showResults = (result) => {
 };
 const fetchMainRout = (rout) => fetch(rout);
 
-fetchMainRout('/home')
+fetchMainRout('/NewsToday')
   .then((result) => result.json())
   .then((res) => showResults(res))
   .catch(console.error);
 
+const showErrMsg = () => {
+  cleardate(container);
+  const errMsg = document.createElement('h2');
+  container.appendChild(errMsg);
+  errMsg.textContent = 'Sorry, No result Found';
+
+}
 
 const displyData = (endpoint) => {
   fetch(endpoint, {
@@ -62,12 +76,20 @@ const displyData = (endpoint) => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name: searchInput.value }),
   }).then((result) => result.json())
-    .then((res) => showResults(res))
+    .then((res) => {
+      if (res.totalResults > 0) {
+        showResults(res);
+      } else {
+        showErrMsg();
+      }
+    })
     .catch(console.error);
 };
 // /// Disply data in Desktop device ////////
 searchInput.addEventListener('keyup', (event) => {
-  if (event.keyCode === 13) displyData('/search');
+  if (event.keyCode === 13) {
+    displyData('/search');
+  }
 });
 // ///Disply data in all device////////
 searchButton.addEventListener('click', () => { displyData('/search'); });
