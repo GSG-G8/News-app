@@ -4,12 +4,6 @@ const container = document.querySelector('.section');
 const emptyMsg = document.getElementById('emptyMsg');
 
 
-// if (searchInput.validity.valueMissing) {
-//   emptyMsg.textContent = '';
-//   emptyMsg.textContent = 'Empty value not allowed';
-//   emptyMsg.style.color = 'red';
-// }
-
 const cleardate = (myNode) => {
   while (myNode.firstChild) {
     myNode.removeChild(myNode.firstChild);
@@ -67,10 +61,10 @@ const showErrMsg = () => {
   const errMsg = document.createElement('h2');
   container.appendChild(errMsg);
   errMsg.textContent = 'Sorry, No result Found';
-
-}
+};
 
 const displyData = (endpoint) => {
+  emptyMsg.textContent = '';
   fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -88,8 +82,18 @@ const displyData = (endpoint) => {
 // /// Disply data in Desktop device ////////
 searchInput.addEventListener('keyup', (event) => {
   if (event.keyCode === 13) {
-    displyData('/search');
+    if (searchInput.validity.valueMissing) {
+      emptyMsg.textContent = '';
+      emptyMsg.textContent = 'Empty value not allowed';
+      emptyMsg.style.color = 'red';
+    } else displyData('/search');
   }
 });
 // ///Disply data in all device////////
-searchButton.addEventListener('click', () => { displyData('/search'); });
+searchButton.addEventListener('click', () => {
+  if (searchInput.validity.valueMissing) {
+    emptyMsg.textContent = '';
+    emptyMsg.textContent = 'Empty value not allowed';
+    emptyMsg.style.color = 'red';
+  } else displyData('/search');
+});
