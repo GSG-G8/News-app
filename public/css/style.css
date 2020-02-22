@@ -39,6 +39,15 @@
   text-align: center;
   margin-top: 5%;
 }
+.search{
+  display: flex;
+  justify-content: center;
+}
+.search__label{
+  margin: 5px;
+  padding: 5px;
+  
+}
 .search__input {
   width: 30%;
   height: 3em;
@@ -153,6 +162,7 @@ line-height: 25px;
   }
   .section__news__link{
     width: 50%;
+    padding: 0.5rem 1rem;
   }
 
   .section__news{
